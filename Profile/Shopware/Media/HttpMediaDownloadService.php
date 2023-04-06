@@ -73,7 +73,7 @@ class HttpMediaDownloadService extends BaseMediaService implements MediaFileProc
             $mediaIds[] = $work->getMediaId();
         }
 
-        if (!\is_dir('_temp') && !\mkdir('_temp') && !\is_dir('_temp')) {
+        if (!\is_dir('tmp') && !\mkdir('tmp') && !\is_dir('tmp')) {
             $this->loggingService->addLogEntry(new ExceptionRunLog(
                 $runId,
                 DefaultEntities::MEDIA,
@@ -135,7 +135,7 @@ class HttpMediaDownloadService extends BaseMediaService implements MediaFileProc
 
             $response = $result['value'];
             $fileExtension = $additionalData['file_extension'] ?? \pathinfo($additionalData['uri'], \PATHINFO_EXTENSION);
-            $filePath = \sprintf('_temp/%s.%s', $uuid, $fileExtension);
+            $filePath = \sprintf('tmp/%s.%s', $uuid, $fileExtension);
 
             $streamContext = \stream_context_create([
                 'http' => [
